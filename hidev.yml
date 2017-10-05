@@ -1,0 +1,16 @@
+package:
+    type:           yii2-extension
+    name:           yii2-autobus
+    headline:       Yii2 AutoBus
+    title:          Simple automated command bus
+    keywords:       yii2, autobus
+    description:    |
+        Simple automated bus over [Tactician] command bus.
+
+        Provides simple interface:
+
+        - `addCommands($branch, $commands)`
+        - `hasCommand($branch, $name)`
+        - `runCommand($branch, $name, $args)`
+
+        [Tactician]:    https://github.com/thephpleague/tactician
