@@ -3,10 +3,10 @@
 return [
     'components' => [
         'autobus' => [
-            'class' => \hiqdev\yii2\autobus\AutoBus::class,
+            'class' => \hiqdev\yii2\autobus\components\BranchedAutoBus::class,
         ],
         'commandBus' => [
-            'class' => \hiqdev\yii2\autobus\bus\CommandBusInterface::class,
+            'class' => \hiqdev\yii2\autobus\components\CommandBusInterface::class,
             'middlewares' => [
                 'load' => \hiqdev\yii2\autobus\bus\LoadMiddleware::class,
             ],
@@ -14,9 +14,12 @@ return [
     ],
     'container' => [
         'definitions' => [
-            \hiqdev\yii2\autobus\bus\CommandBusInterface::class => [
+            \hiqdev\yii2\autobus\components\CommandFactoryInterface::class => [
+                'class' => \hiqdev\yii2\autobus\components\SimpleCommandFactory::class,
+            ],
+            \hiqdev\yii2\autobus\components\CommandBusInterface::class => [
                 [
-                    'class' => \hiapi\components\TacticianCommandBus::class,
+                    'class' => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
                 ],
                 [
                     \yii\di\Instance::of(\my\CommandHandlerMiddleware::class),
