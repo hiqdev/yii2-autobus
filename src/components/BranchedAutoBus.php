@@ -1,4 +1,12 @@
 <?php
+/**
+ * Simple automated command bus
+ *
+ * @link      https://github.com/hiqdev/yii2-autobus
+ * @package   yii2-autobus
+ * @license   BSD-3-Clause
+ * @copyright Copyright (c) 2017, HiQDev (http://hiqdev.com/)
+ */
 
 namespace hiqdev\yii2\autobus\components;
 
@@ -44,16 +52,15 @@ class BranchedAutoBus extends Component implements AutoBusInterface
         return $this->bus->handle($command);
     }
 
-    static public function parseName($name)
+    public static function parseName($name)
     {
         $id = Inflector::camel2id($name);
 
         return explode('-', $id, 2);
     }
 
-    static public function camelSplit($input, $limit=-1)
+    public static function camelSplit($input, $limit=-1)
     {
         return preg_split('/(?=[A-Z])/', $input, $limit);
-    }                                                                                       
-
+    }
 }

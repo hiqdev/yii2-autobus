@@ -7,6 +7,7 @@
 [![Build Status](https://img.shields.io/travis/hiqdev/yii2-autobus.svg)](https://travis-ci.org/hiqdev/yii2-autobus)
 [![Scrutinizer Code Coverage](https://img.shields.io/scrutinizer/coverage/g/hiqdev/yii2-autobus.svg)](https://scrutinizer-ci.com/g/hiqdev/yii2-autobus/)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/hiqdev/yii2-autobus.svg)](https://scrutinizer-ci.com/g/hiqdev/yii2-autobus/)
+[![Dependency Status](https://www.versioneye.com/php/hiqdev:yii2-autobus/dev-master/badge.svg)](https://www.versioneye.com/php/hiqdev:yii2-autobus/dev-master)
 
 Simple automated bus over [Tactician] command bus.
 
@@ -57,4 +58,4 @@ For more details please see [src/config/params.php].
 This project is released under the terms of the BSD-3-Clause [license](LICENSE).
 Read more [here](http://choosealicense.com/licenses/bsd-3-clause).
 
-Copyright © 2013-2017, HiQDev (http://hiqdev.com/)
+Copyright © 2017, HiQDev (http://hiqdev.com/)
