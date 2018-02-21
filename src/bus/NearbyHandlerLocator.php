@@ -13,9 +13,25 @@ namespace hiqdev\yii2\autobus\bus;
 use League\Tactician\Handler\Locator\HandlerLocator;
 use ReflectionClass;
 use yii\base\UnknownClassException;
+use yii\di\Container;
 
+/**
+ * Class NearbyHandlerLocator
+ *
+ * @author Dmytro Naumenko <d.naumenko.a@gmail.com>
+ */
 class NearbyHandlerLocator implements HandlerLocator
 {
+    /**
+     * @var Container
+     */
+    private $di;
+
+    public function __construct(Container $di)
+    {
+        $this->di = $di;
+    }
+
     public function getHandlerForCommand($class)
     {
         $reflector = new ReflectionClass($class);
@@ -31,6 +47,6 @@ class NearbyHandlerLocator implements HandlerLocator
 
         $className = $reflector->getNamespaceName() . '\\' . $handlerName;
 
-        return new $className();
+        return $this->di->get($className);
     }
 }

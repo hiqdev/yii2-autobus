@@ -10,6 +10,7 @@
 
 namespace hiqdev\yii2\autobus\components;
 
+use hiqdev\yii2\autobus\exceptions\WrongCommandException;
 use yii\base\Component;
 use yii\helpers\Inflector;
 
@@ -30,18 +31,35 @@ class BranchedAutoBus extends Component implements AutoBusInterface
 
     public function hasCommand($name)
     {
-        list($branch, $action) = static::parseName($name);
+        list($branch, $action) = $this->parseName($name);
 
         return !empty($this->branches[$branch][$action]);
     }
 
+    /**
+     * @param string $name the command name
+     * @return string|array
+     * @throws WrongCommandException
+     */
+    public function getCommandConfig($name)
+    {
+        list($branch, $action) = $this->parseName($name);
+        if (!$this->hasCommand($name)) {
+            throw new WrongCommandException("no command $name");
+        }
+
+        return $this->branches[$branch][$action];
+    }
+
+    /**
+     * @param string $name the command name
+     * @param array $args
+     * @return mixed // todo: specify
+     * @throws WrongCommandException
+     */
     public function runCommand($name, $args)
     {
-        list($branch, $action) = static::parseName($name);
-        if (empty($this->branches[$branch][$action])) {
-            throw new WrongCommandException('no command', $name);
-        }
-        $config  = $this->branches[$branch][$action];
+        $config  = $this->getCommandConfig($name);
         $command = $this->factory->create($config, $args);
 
         return $this->handle($command);
@@ -52,10 +70,9 @@ class BranchedAutoBus extends Component implements AutoBusInterface
         return $this->bus->handle($command);
     }
 
-    public static function parseName($name)
+    private function parseName($name)
     {
         $id = Inflector::camel2id($name);
-
         return explode('-', $id, 2);
     }
 
