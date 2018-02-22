@@ -9,17 +9,18 @@
  */
 
 return [
-    'components' => [
-        'autobus' => [
-            'class' => \hiqdev\yii2\autobus\components\BranchedAutoBus::class,
-        ],
-        'commandBus' => [
-            'class' => \hiqdev\yii2\autobus\components\CommandBusInterface::class,
-            'middlewares' => [
-                'load' => \hiqdev\yii2\autobus\bus\LoadMiddleware::class,
-            ],
-        ],
-    ],
+// Should not be used.
+//    'components' => [
+//        'autobus' => [
+//            'class' => \hiqdev\yii2\autobus\components\BranchedAutoBus::class,
+//        ],
+//        'commandBus' => [
+//            'class' => \hiqdev\yii2\autobus\components\CommandBusInterface::class,
+//            'middlewares' => [
+//                'load' => \hiqdev\yii2\autobus\bus\LoadMiddleware::class,
+//            ],
+//        ],
+//    ],
     'container' => [
         'definitions' => [
             \hiqdev\yii2\autobus\components\CommandFactoryInterface::class => [

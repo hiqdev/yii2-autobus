@@ -14,6 +14,7 @@ use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Middleware;
 use Yii;
+use yii\di\Container;
 
 class TacticianCommandBus extends \yii\base\Component implements CommandBusInterface
 {
@@ -31,10 +32,15 @@ class TacticianCommandBus extends \yii\base\Component implements CommandBusInter
      * @var CommandBus
      */
     protected $realCommandBus;
+    /**
+     * @var Container
+     */
+    private $di;
 
-    public function __construct(Middleware $defaultHandler, array $config = [])
+    public function __construct(Middleware $defaultHandler, Container $di, array $config = [])
     {
         parent::__construct($config);
+        $this->di = $di;
         $this->defaultHandler = $defaultHandler;
         $this->realCommandBus = new CommandBus($this->getMiddlewares());
     }
@@ -55,7 +61,7 @@ class TacticianCommandBus extends \yii\base\Component implements CommandBusInter
     {
         foreach ($middlewares as &$middleware) {
             if (!is_object($middleware)) {
-                $middleware = Yii::createObject($middleware);
+                $middleware = $this->di->get($middleware);
             }
         }
 
