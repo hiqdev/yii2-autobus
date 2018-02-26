@@ -14,6 +14,12 @@ use League\Tactician\Middleware;
 use yii\base\Model;
 use yii\web\Request;
 
+/**
+ * Class LoadFromRequestMiddleware takes data from POST or (if it is empty) from GET request,
+ * trims all the values and tries to load them to the command.
+ *
+ * @author Dmytro Naumenko <d.naumenko.a@gmail.com>
+ */
 class LoadFromRequestMiddleware implements Middleware
 {
     /**
@@ -39,7 +45,8 @@ class LoadFromRequestMiddleware implements Middleware
             throw new \Exception('This middleware can load only commands of Model class');
         }
 
-        $successLoad = $command->load($this->request->post() ?: $this->request->get(), '');
+        $data = array_map('trim', $this->request->post() ?: $this->request->get());
+        $successLoad = $command->load($data, '');
         if (!$successLoad) {
             // TODO: specific exception
             throw new \Exception('Failed to load command');
