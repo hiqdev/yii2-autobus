@@ -45,8 +45,8 @@ class LoadFromRequestMiddleware implements Middleware
             throw new \Exception('This middleware can load only commands of Model class');
         }
 
-        $request = $this->request->getParsedBody() ?: $this->request->getQueryParams();
-        $data = array_walk_recursive($request, function (&$value) {
+        $data = $this->request->getParsedBody() ?: $this->request->getQueryParams();
+        array_walk_recursive($data, function (&$value) {
             if (is_string($value)) {
                 $value = trim($value);
             }
