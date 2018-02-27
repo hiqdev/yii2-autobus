@@ -11,8 +11,8 @@
 namespace hiqdev\yii2\autobus\bus;
 
 use League\Tactician\Middleware;
+use Psr\Http\Message\ServerRequestInterface;
 use yii\base\Model;
-use yii\web\Request;
 
 /**
  * Class LoadFromRequestMiddleware takes data from POST or (if it is empty) from GET request,
@@ -23,11 +23,11 @@ use yii\web\Request;
 class LoadFromRequestMiddleware implements Middleware
 {
     /**
-     * @var Request
+     * @var ServerRequestInterface
      */
     private $request;
 
-    public function __construct(Request $request)
+    public function __construct(ServerRequestInterface $request)
     {
         $this->request = $request;
     }
@@ -45,7 +45,13 @@ class LoadFromRequestMiddleware implements Middleware
             throw new \Exception('This middleware can load only commands of Model class');
         }
 
-        $data = array_map('trim', $this->request->post() ?: $this->request->get());
+        $request = $this->request->getParsedBody() ?: $this->request->getQueryParams();
+        $data = array_walk_recursive($request, function (&$value) {
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+        });
+
         $successLoad = $command->load($data, '');
         if (!$successLoad) {
             // TODO: specific exception
