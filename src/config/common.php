@@ -23,9 +23,6 @@ return [
 //    ],
     'container' => [
         'definitions' => [
-            \hiqdev\yii2\autobus\components\CommandFactoryInterface::class => [
-                'class' => \hiqdev\yii2\autobus\components\SimpleCommandFactory::class,
-            ],
             \hiqdev\yii2\autobus\components\CommandBusInterface::class => [
                 [
                     'class' => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
@@ -44,6 +41,9 @@ return [
                     \yii\di\Instance::of(\League\Tactician\Handler\MethodNameInflector\HandleInflector::class),
                 ],
             ],
+        ],
+        'singletons' => [
+            \hiqdev\yii2\autobus\components\CommandFactoryInterface::class => \hiqdev\yii2\autobus\components\SimpleCommandFactory::class,
         ],
     ],
 ];
