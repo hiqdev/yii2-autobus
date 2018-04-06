@@ -44,6 +44,7 @@ return [
         ],
         'singletons' => [
             \hiqdev\yii2\autobus\components\CommandFactoryInterface::class => \hiqdev\yii2\autobus\components\SimpleCommandFactory::class,
+            \hiqdev\yii2\autobus\components\AutoBusFactoryInterface::class => \hiqdev\yii2\autobus\components\ContainerAutoBusFactory::class,
         ],
     ],
 ];
