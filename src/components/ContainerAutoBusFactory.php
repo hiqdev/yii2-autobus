@@ -19,6 +19,8 @@ use yii\di\Container;
  */
 class ContainerAutoBusFactory implements AutoBusFactoryInterface
 {
+    public $mapping = [];
+
     public function __construct(Container $container)
     {
         $this->container = $container;
@@ -26,6 +28,11 @@ class ContainerAutoBusFactory implements AutoBusFactoryInterface
 
     public function get($name): AutoBusInterface
     {
-        return $this->container->get($name);
+        return $this->container->get($this->mapName($name));
+    }
+
+    protected function mapName(string $name): string
+    {
+        return empty($this->mapping[$name]) ? $name : $this->mapping[$name];
     }
 }
