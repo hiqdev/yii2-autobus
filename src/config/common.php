@@ -25,7 +25,7 @@ return [
         'definitions' => [
             \hiqdev\yii2\autobus\components\CommandBusInterface::class => [
                 [
-                    'class' => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
+                    '__class' => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
                 ],
                 [
                     \yii\di\Instance::of(\my\CommandHandlerMiddleware::class),
@@ -33,7 +33,7 @@ return [
             ],
             \my\CommandHandlerMiddleware::class => [
                 [
-                    'class' => \League\Tactician\Handler\CommandHandlerMiddleware::class,
+                    '__class' => \League\Tactician\Handler\CommandHandlerMiddleware::class,
                 ],
                 [
                     \yii\di\Instance::of(\League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor::class),
