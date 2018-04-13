@@ -57,7 +57,7 @@ class BranchedAutoBus extends Component implements AutoBusInterface
      * @return mixed // todo: specify
      * @throws WrongCommandException
      */
-    public function runCommand($name, $args)
+    public function runCommand($name, $args = [])
     {
         $config  = $this->getCommandConfig($name);
         $command = $this->factory->create($config, $args);
