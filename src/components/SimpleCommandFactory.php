@@ -34,9 +34,9 @@ class SimpleCommandFactory implements CommandFactoryInterface
     /**
      * @param $config
      * @param array $args
-     * @return object
      * @throws Exception
      * @throws \yii\base\InvalidConfigException
+     * @return object
      */
     public function create($config, array $args)
     {

@@ -38,8 +38,8 @@ class BranchedAutoBus extends Component implements AutoBusInterface
 
     /**
      * @param string $name the command name
-     * @return string|array
      * @throws WrongCommandException
+     * @return string|array
      */
     public function getCommandConfig($name)
     {
@@ -54,8 +54,8 @@ class BranchedAutoBus extends Component implements AutoBusInterface
     /**
      * @param string $name the command name
      * @param array $args
-     * @return mixed // todo: specify
      * @throws WrongCommandException
+     * @return mixed // todo: specify
      */
     public function runCommand($name, $args = [])
     {
@@ -73,6 +73,7 @@ class BranchedAutoBus extends Component implements AutoBusInterface
     private function parseName($name)
     {
         $id = Inflector::camel2id($name);
+
         return explode('-', $id, 2);
     }
 

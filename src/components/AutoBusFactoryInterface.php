@@ -11,7 +11,7 @@
 namespace hiqdev\yii2\autobus\components;
 
 /**
- * AutoBus Factory Interface
+ * AutoBus Factory Interface.
  *
  * @author Andrii Vasyliev <sol@hiqdev.com>
  */
@@ -19,4 +19,3 @@ interface AutoBusFactoryInterface
 {
     public function get($name): AutoBusInterface;
 }
-

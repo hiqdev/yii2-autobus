@@ -35,8 +35,8 @@ class LoadFromRequestMiddleware implements Middleware
     /**
      * @param object|Model $command
      * @param callable $next
-     * @return mixed
      * @throws \Exception
+     * @return mixed
      */
     public function execute($command, callable $next)
     {
