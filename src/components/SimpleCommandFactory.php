@@ -11,6 +11,7 @@
 namespace hiqdev\yii2\autobus\components;
 
 use Exception;
+use hiqdev\yii2\autobus\exceptions\WrongCommandException;
 use yii\base\Model;
 use yii\di\Container;
 
@@ -36,7 +37,7 @@ class SimpleCommandFactory implements CommandFactoryInterface
      * @param array $args
      * @return object
      * @throws Exception
-     * @throws \yii\base\InvalidConfigException
+     * @throws WrongCommandException when command config is not suitable
      */
     public function create($config, array $args)
     {
@@ -47,13 +48,13 @@ class SimpleCommandFactory implements CommandFactoryInterface
             $className = $config['class'];
             unset($config['class']);
         } else {
-            throw new Exception('bad command config');
+            throw new WrongCommandException('bad command config');
         }
 
         /** @var Model $command */
         $command = $this->container->get($className, $config);
 
-        if ($args) {
+        if ($args && $command instanceof Model) {
             $command->load($args, '');
         }
 
