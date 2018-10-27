@@ -16,7 +16,7 @@ use yii\base\UnknownClassException;
 use yii\di\Container;
 
 /**
- * Class NearbyHandlerLocator
+ * Class NearbyHandlerLocator.
  *
  * @author Dmytro Naumenko <d.naumenko.a@gmail.com>
  */

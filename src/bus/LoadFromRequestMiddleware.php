@@ -35,8 +35,8 @@ class LoadFromRequestMiddleware implements Middleware
     /**
      * @param object|Model $command
      * @param callable $next
-     * @return mixed
      * @throws \Exception
+     * @return mixed
      */
     public function execute($command, callable $next)
     {
@@ -45,15 +45,15 @@ class LoadFromRequestMiddleware implements Middleware
             throw new \Exception('This middleware can load only commands of Model class');
         }
 
-        $data = $this->request->getParsedBody() ?: $this->request->getQueryParams();
+        $data = array_merge($this->request->getParsedBody() ?: $this->request->getQueryParams(), $this->request->getAttributes());
         array_walk_recursive($data, function (&$value) {
-            if (is_string($value)) {
+            if (\is_string($value)) {
                 $value = trim($value);
             }
         });
 
         $successLoad = $command->load($data, '');
-        if (!$successLoad) {
+        if (!$successLoad && !empty($data)) {
             // TODO: specific exception
             throw new \Exception('Failed to load command');
         }

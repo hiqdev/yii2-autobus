@@ -35,9 +35,9 @@ class SimpleCommandFactory implements CommandFactoryInterface
     /**
      * @param $config
      * @param array $args
-     * @return object
      * @throws Exception
      * @throws WrongCommandException when command config is not suitable
+     * @return object
      */
     public function create($config, array $args)
     {

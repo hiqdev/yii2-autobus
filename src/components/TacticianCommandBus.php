@@ -13,7 +13,6 @@ namespace hiqdev\yii2\autobus\components;
 use League\Tactician\CommandBus;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Middleware;
-use Yii;
 use yii\di\Container;
 
 class TacticianCommandBus extends \yii\base\Component implements CommandBusInterface
