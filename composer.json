@@ -42,7 +42,7 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
+        "yiisoft/yii-core": "^3.0@dev",
         "league/tactician": "^1.0"
     },
     "require-dev": {
@@ -55,6 +55,9 @@
         }
     },
     "extra": {
+        "branch-alias": {
+            "v2.x-dev": "2.x-dev"
+        },
         "config-plugin": {
             "params": "src/config/params.php",
             "common": "src/config/common.php"
