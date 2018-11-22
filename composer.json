@@ -42,7 +42,6 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
         "league/tactician": "^1.0"
     },
     "require-dev": {
