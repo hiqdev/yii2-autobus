@@ -22,9 +22,8 @@ class BranchedAutoBus extends Component implements AutoBusInterface
 
     public $branches = [];
 
-    public function __construct(CommandBusInterface $bus, CommandFactoryInterface $factory, array $config = [])
+    public function __construct(CommandBusInterface $bus, CommandFactoryInterface $factory)
     {
-        parent::__construct($config);
         $this->bus = $bus;
         $this->factory = $factory;
     }
