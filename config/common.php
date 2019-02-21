@@ -21,23 +21,32 @@ return [
 //            ],
 //        ],
 //    ],
-
-    \hiqdev\yii2\autobus\components\CommandBusInterface::class => [
-        '__class' => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
-        '__construct()' => [
-            \yii\di\Reference::to(\my\CommandHandlerMiddleware::class),
+    'container' => [
+        'definitions' => [
+            \hiqdev\yii2\autobus\components\CommandBusInterface::class => [
+                [
+                    '__class' => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
+                ],
+                [
+                    \yii\di\Instance::of(\my\CommandHandlerMiddleware::class),
+                ],
+            ],
+            \my\CommandHandlerMiddleware::class => [
+                [
+                    '__class' => \League\Tactician\Handler\CommandHandlerMiddleware::class,
+                ],
+                [
+                    \yii\di\Instance::of(\League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor::class),
+                    \yii\di\Instance::of(\hiqdev\yii2\autobus\bus\NearbyHandlerLocator::class),
+                    \yii\di\Instance::of(\League\Tactician\Handler\MethodNameInflector\HandleInflector::class),
+                ],
+            ],
         ],
-    ],
-    \my\CommandHandlerMiddleware::class => [
-        '__class' => \League\Tactician\Handler\CommandHandlerMiddleware::class,
-        '__construct()' => [
-            'commandNameExtractor'  => \yii\di\Reference::to(\League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor::class),
-            'handlerLocator'        => \yii\di\Reference::to(\hiqdev\yii2\autobus\bus\NearbyHandlerLocator::class),
-            'methodNameInflector'   => \yii\di\Reference::to(\League\Tactician\Handler\MethodNameInflector\HandleInflector::class),
+        'singletons' => [
+            \hiqdev\yii2\autobus\components\CommandFactoryInterface::class => \hiqdev\yii2\autobus\components\SimpleCommandFactory::class,
+            \hiqdev\yii2\autobus\components\AutoBusFactoryInterface::class => [
+                '__class' => \hiqdev\yii2\autobus\components\ContainerAutoBusFactory::class,
+            ],
         ],
-    ],
-    \hiqdev\yii2\autobus\components\CommandFactoryInterface::class => \hiqdev\yii2\autobus\components\SimpleCommandFactory::class,
-    \hiqdev\yii2\autobus\components\AutoBusFactoryInterface::class => [
-        '__class' => \hiqdev\yii2\autobus\components\ContainerAutoBusFactory::class,
     ],
 ];
