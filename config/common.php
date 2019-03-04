@@ -36,5 +36,5 @@ $singletons = [
 
 return class_exists('Yii')
     ? ['container' => ['definitions' => $definitions, 'singletons' => $singletons]]
-    : [array_merge($singletons, ['factory' => ['__construct' => ['definitions' => $definitions]]])]
+    : array_merge($singletons, ['factory' => ['__construct' => ['definitions' => $definitions]]])
 ;
