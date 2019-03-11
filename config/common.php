@@ -12,15 +12,15 @@ $definitions = [
     \hiqdev\yii2\autobus\components\CommandBusInterface::class => [
         '__class' => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
         '__construct()' => [
-            \yii\di\Reference::to(\my\CommandHandlerMiddleware::class),
+            \hiqdev\yii2\autobus\yii::referenceTo(\my\CommandHandlerMiddleware::class),
         ],
     ],
     \my\CommandHandlerMiddleware::class => [
         '__class' => \League\Tactician\Handler\CommandHandlerMiddleware::class,
         '__construct()' => [
-            \yii\di\Reference::to(\League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor::class),
-            \yii\di\Reference::to(\hiqdev\yii2\autobus\bus\NearbyHandlerLocator::class),
-            \yii\di\Reference::to(\League\Tactician\Handler\MethodNameInflector\HandleInflector::class),
+            \hiqdev\yii2\autobus\yii::referenceTo(\League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor::class),
+            \hiqdev\yii2\autobus\yii::referenceTo(\hiqdev\yii2\autobus\bus\NearbyHandlerLocator::class),
+            \hiqdev\yii2\autobus\yii::referenceTo(\League\Tactician\Handler\MethodNameInflector\HandleInflector::class),
         ],
     ],
 ];
