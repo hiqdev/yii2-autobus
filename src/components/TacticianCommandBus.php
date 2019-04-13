@@ -38,6 +38,7 @@ class TacticianCommandBus extends \yii\base\Component implements CommandBusInter
 
     public function __construct(Middleware $defaultHandler, Container $di, array $config = [])
     {
+        parent::__construct($config);
         $this->di = $di;
         $this->defaultHandler = $defaultHandler;
         $this->realCommandBus = new CommandBus($this->getMiddlewares());
