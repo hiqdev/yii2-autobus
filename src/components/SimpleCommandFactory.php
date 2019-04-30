@@ -46,6 +46,9 @@ class SimpleCommandFactory implements CommandFactoryInterface
         } elseif (is_array($config['class']) && !empty($config['class'])) {
             $className = $config['class'];
             unset($config['class']);
+        } elseif (!empty($config['__class'])) {
+            $className = $config['__class'];
+            unset($config['__class']);
         } else {
             throw new Exception('bad command config');
         }
