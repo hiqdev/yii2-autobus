@@ -38,7 +38,12 @@ class NearbyHandlerLocator implements HandlerLocator
         $dir = dirname($reflector->getFileName());
 
         $commandName = $reflector->getShortName();
-        $handlerName = substr($commandName, 0, strrpos($commandName, 'Command')) . 'Handler';
+        
+        if (strrpos($commandName, 'Command') !== false) {
+            $handlerName = substr($commandName, 0, strrpos($commandName, 'Command')) . 'Handler';
+        } else {
+            $handlerName = $commandName . 'Handler';
+        }
 
         $path = $dir . DIRECTORY_SEPARATOR . $handlerName . '.php';
         if (!is_file($path)) {
