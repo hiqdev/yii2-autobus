@@ -8,15 +8,17 @@
  * @copyright Copyright (c) 2017-2018, HiQDev (http://hiqdev.com/)
  */
 
+use hiqdev\yii\compat\yii;
+
 $definitions = [
     \hiqdev\yii2\autobus\components\CommandBusInterface::class => [
-        '__class' => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
+        yii::classKey() => \hiqdev\yii2\autobus\components\TacticianCommandBus::class,
         '__construct()' => [
             \hiqdev\yii2\autobus\yii::referenceTo(\my\CommandHandlerMiddleware::class),
         ],
     ],
     \my\CommandHandlerMiddleware::class => [
-        '__class' => \League\Tactician\Handler\CommandHandlerMiddleware::class,
+        yii::classKey() => \League\Tactician\Handler\CommandHandlerMiddleware::class,
         '__construct()' => [
             \hiqdev\yii2\autobus\yii::referenceTo(\League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor::class),
             \hiqdev\yii2\autobus\yii::referenceTo(\hiqdev\yii2\autobus\bus\NearbyHandlerLocator::class),
@@ -27,10 +29,10 @@ $definitions = [
 
 $singletons = [
     \hiqdev\yii2\autobus\components\CommandFactoryInterface::class => [
-        '__class' => \hiqdev\yii2\autobus\components\SimpleCommandFactory::class,
+        yii::classKey() => \hiqdev\yii2\autobus\components\SimpleCommandFactory::class,
     ],
     \hiqdev\yii2\autobus\components\AutoBusFactoryInterface::class => [
-        '__class' => \hiqdev\yii2\autobus\components\ContainerAutoBusFactory::class,
+        yii::classKey() => \hiqdev\yii2\autobus\components\ContainerAutoBusFactory::class,
     ],
 ];
 
