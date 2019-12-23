@@ -4,10 +4,6 @@
 /.hidev/runtime
 /.hidev/vendor
 
-# local config
-/.env
-/hidev-local.yml
-
 # IDE & OS files
 .*.swp
 .DS_Store
@@ -18,16 +14,6 @@
 Thumbs.db
 nbproject
 
-# composer internals
-/composer.lock
-/vendor
-
-# php-cs-fixer cache
-.php_cs.cache
-
-# phpunit generated files
-coverage.clover
-
 # Binaries
 chkipper.phar
 composer.phar
@@ -35,3 +21,14 @@ ocular.phar
 php-cs-fixer.phar
 phpunit-skelgen.phar
 phpunit.phar
+
+# local config
+/.env
+/hidev-local.yml
+
+# dynamic files
+/composer.lock
+/vendor
+.php_cs.cache
+coverage.clover
+.phpunit.result.cache

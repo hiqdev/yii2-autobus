@@ -45,6 +45,8 @@
         "league/tactician": "^1.0"
     },
     "require-dev": {
+        "yiisoft/yii2": "dev-master",
+        "phpunit/phpunit": "^8.0",
         "hiqdev/hidev-php": "dev-master",
         "hiqdev/hidev-hiqdev": "dev-master"
     },
@@ -58,6 +60,7 @@
             "1.0": "1.0.x-dev"
         },
         "config-plugin": {
+            "tests": ["$common", "config/tests.php"],
             "params": "config/params.php",
             "common": "config/common.php"
         }
