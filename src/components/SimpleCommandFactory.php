@@ -54,7 +54,7 @@ class SimpleCommandFactory implements CommandFactoryInterface
         }
 
         /** @var Model $command */
-        $command = $this->container->get($className, $config);
+        $command = $this->container->get($className, [], $config);
 
         if ($args) {
             $command->load($args, '');
