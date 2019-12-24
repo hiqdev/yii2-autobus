@@ -17,7 +17,16 @@ return [
                 '__construct()' => [
                     [
                         'first' => [
-                            '',
+                            '__class' => \hiqdev\yii2\autobus\tests\unit\DumbCommand::class,
+                            '__construct()' => ['first'],
+                        ],
+                        'joinWithSpace' => [
+                            '__class' => \hiqdev\yii2\autobus\tests\unit\JoinCommand::class,
+                            '__construct()' => [' '],
+                        ],
+                        'joinWithComma' => [
+                            '__class' => \hiqdev\yii2\autobus\tests\unit\JoinCommand::class,
+                            '__construct()' => [','],
                         ],
                     ],
                 ],

@@ -10,23 +10,20 @@
 
 namespace hiqdev\yii2\autobus\tests\unit;
 
-use PHPUnit\Framework\TestCase;
-use Yii;
 use hiqdev\yii2\autobus\components\SimpleAutoBus;
-use hiqdev\yii2\autobus\components\CommandBusInterface;
+use hiqdev\yii2\autobus\exceptions\WrongCommandException;
+use Yii;
 
 /**
  * Class SimpleAutoBusTest
  */
-class SimpleAutoBusTest extends TestCase
-
+class SimpleAutoBusTest extends \PHPUnit\Framework\TestCase
 {
-    private $di;
+    private $bus;
 
     public function setUp(): void
     {
-        $this->di = Yii::$container;
-        $this->bus = $this->di->get(SimpleAutoBus::class);
+        $this->bus = Yii::$container->get(SimpleAutoBus::class);
         parent::setUp();
     }
 
@@ -34,5 +31,27 @@ class SimpleAutoBusTest extends TestCase
     {
         $this->assertTrue($this->bus->hasCommand('first'));
         $this->assertFalse($this->bus->hasCommand('nonexistent'));
+    }
+
+    public function testGetCommandConfig()
+    {
+        $config = $this->bus->getCommandConfig('first');
+        $this->assertIsArray($config);
+    }
+
+    public function testRunCommand()
+    {
+        $result = $this->bus->runCommand('first');
+        $this->assertSame('first', $result);
+        $result = $this->bus->runCommand('joinWithSpace', ['hello', 'world']);
+        $this->assertSame('hello world', $result);
+        $result = $this->bus->runCommand('joinWithComma', ['a', 'b', 'c']);
+        $this->assertSame('a,b,c', $result);
+    }
+
+    public function testWrongCommand()
+    {
+        $this->expectException(WrongCommandException::class);
+        $this->bus->runCommand('nonexistent');
     }
 }
