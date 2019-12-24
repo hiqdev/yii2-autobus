@@ -10,6 +10,8 @@
 
 namespace hiqdev\yii2\autobus\components;
 
+use hiqdev\yii2\autobus\exceptions\WrongCommandException;
+
 /**
  * Class SimpleAutoBus represents simple routing: name -> config.
  *

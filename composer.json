@@ -52,7 +52,8 @@
     },
     "autoload": {
         "psr-4": {
-            "hiqdev\\yii2\\autobus\\": "src"
+            "hiqdev\\yii2\\autobus\\": "src",
+            "hiqdev\\yii2\\autobus\\tests\\": "tests"
         }
     },
     "extra": {
