@@ -43,7 +43,7 @@ class SimpleCommandFactory implements CommandFactoryInterface
         if (is_string($config)) {
             $className = $config;
             $config = [];
-        } elseif (is_array($config['class']) && !empty($config['class'])) {
+        } elseif (!empty($config['class']) && is_array($config['class'])) {
             $className = $config['class'];
             unset($config['class']);
         } elseif (!empty($config['__class'])) {
