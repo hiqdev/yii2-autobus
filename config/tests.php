@@ -13,7 +13,8 @@ return [
     'basePath' => dirname(__DIR__),
     'container' => [
         'singletons' => [
-            \hiqdev\yii2\autobus\components\SimpleAutoBus::class => [
+            'first-bus' => [
+                '__class' => \hiqdev\yii2\autobus\components\SimpleAutoBus::class,
                 '__construct()' => [
                     [
                         'first' => [
@@ -27,6 +28,17 @@ return [
                         'joinWithComma' => [
                             '__class' => \hiqdev\yii2\autobus\tests\unit\JoinCommand::class,
                             '__construct()' => [','],
+                        ],
+                    ],
+                ],
+            ],
+            'other-bus' => [
+                '__class' => \hiqdev\yii2\autobus\components\SimpleAutoBus::class,
+                '__construct()' => [
+                    [
+                        'second' => [
+                            '__class' => \hiqdev\yii2\autobus\tests\unit\DumbCommand::class,
+                            '__construct()' => ['second'],
                         ],
                     ],
                 ],

@@ -10,6 +10,9 @@
 
 namespace hiqdev\yii2\autobus\components;
 
+use hiqdev\yii2\autobus\exceptions\AutobusException;
+use hiqdev\yii2\autobus\exceptions\WrongCommandException;
+
 /**
  * Composite autobus.
  *
@@ -56,11 +59,21 @@ class CompositeAutoBus implements AutoBusInterface
 
     public function hasCommand($name)
     {
-        return $this->getBusFor() !== null;
+        return $this->getBusFor($name) !== null;
     }
 
-    public function runCommand($name, $args)
+    public function runCommand($name, $args = [])
     {
-        return $this->getBusFor($name)->runCommand($name, $args);
+        $bus = $this->getBusFor($name);
+        if (empty($bus)) {
+            throw new WrongCommandException("no command $name");
+        }
+
+        return $bus->runCommand($name, $args);
+    }
+
+    public function handle($command)
+    {
+        throw new AutobusException('not implemented');
     }
 }
