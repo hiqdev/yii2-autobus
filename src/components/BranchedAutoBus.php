@@ -31,9 +31,9 @@ class BranchedAutoBus extends Component implements AutoBusInterface
 
     public function hasCommand($name)
     {
-        list($branch, $action) = $this->parseName($name);
+        @list($branch, $action) = $this->parseName($name);
 
-        return !empty($this->branches[$branch][$action]);
+        return empty($this->branches[$branch][$action]);
     }
 
     /**
@@ -43,7 +43,7 @@ class BranchedAutoBus extends Component implements AutoBusInterface
      */
     public function getCommandConfig($name)
     {
-        list($branch, $action) = $this->parseName($name);
+        @list($branch, $action) = $this->parseName($name);
         if (!$this->hasCommand($name)) {
             throw new WrongCommandException("no command $name");
         }
