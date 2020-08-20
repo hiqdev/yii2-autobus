@@ -33,7 +33,7 @@ class BranchedAutoBus extends Component implements AutoBusInterface
     {
         @list($branch, $action) = $this->parseName($name);
 
-        return empty($this->branches[$branch][$action]);
+        return !empty($this->branches[$branch][$action]);
     }
 
     /**
