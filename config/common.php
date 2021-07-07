@@ -35,6 +35,6 @@ $singletons = [
 ];
 
 return class_exists(Yiisoft\Factory\Definition\Reference::class)
-    ? array_merge($singletons, ['factory' => ['__construct' => ['definitions' => $definitions]]])
+    ? array_merge($singletons, ['factory' => ['__construct()' => ['definitions' => $definitions]]])
     : ['container' => ['definitions' => $definitions, 'singletons' => $singletons]]
 ;
