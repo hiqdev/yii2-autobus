@@ -31,7 +31,12 @@ class BranchedAutoBus extends Component implements AutoBusInterface
 
     public function hasCommand($name)
     {
-        @list($branch, $action) = $this->parseName($name);
+        $parsedName = $this->parseName($name);
+        if (count($parsedName) !== 2) {
+            return false;
+        }
+
+        [$branch, $action] = $parsedName;
 
         return !empty($this->branches[$branch][$action]);
     }
