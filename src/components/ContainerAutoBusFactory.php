@@ -21,6 +21,8 @@ class ContainerAutoBusFactory implements AutoBusFactoryInterface
 {
     public $mapping = [];
 
+    private $container;
+
     public function __construct(Container $container)
     {
         $this->container = $container;
