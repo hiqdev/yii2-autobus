@@ -19,9 +19,9 @@ use yii\di\Container;
  */
 class ContainerAutoBusFactory implements AutoBusFactoryInterface
 {
-    public $mapping = [];
+    public array $mapping = [];
 
-    private $container;
+    private Container $container;
 
     public function __construct(Container $container)
     {
